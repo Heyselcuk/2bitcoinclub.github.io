@@ -1,0 +1,58 @@
+<html>
+<head>
+
+<title>Bitcoin Price Index Watcher</title>
+<style type="text/css">
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body {
+  background-color: #4d4d4e;
+}
+
+  #data {
+    font-size: 100px;
+    font-family: Ubuntu;
+    color: White;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 0px;
+  }
+</style>
+
+<meta http-equiv="refresh" content="60" >
+
+</head>
+<body>
+
+<img src="bitcoin-logo.png">
+
+  <div id="data" />
+
+  <script type="text/javascript">
+    var xmlhttp = new XMLHttpRequest();
+    var url = "https://blockchain.info/ticker";
+
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4  &&  this.status == 200) {
+        var json = JSON.parse(this.responseText);
+        parseJson(json);
+      }		
+    };
+
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+
+    function parseJson(json) {
+
+      var usdValue = " " + json["USD"]["15m"] + " USD";
+
+      document.getElementById("data").innerHTML = usdValue 
+}
+</script>
+</body>
+</html>
